@@ -1,0 +1,95 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+
+import {
+  Image,
+  Stack,
+  Heading,
+  Text,
+  Button,
+  Card,
+  CardBody,
+  Container,
+} from "@chakra-ui/react";
+
+// icons
+import { FaArrowLeft } from "react-icons/fa";
+
+function DetailProductPage() {
+  const { id } = useParams();
+  const [product, setProduct] = useState({});
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+
+    const fetchProductById = async () => {
+      try {
+        const res = await axios.get(`/api/products/${id}`, {
+          cancelToken: source.token,
+        });
+        setProduct(res.data.data); // Adjust based on response structure
+      } catch (err) {
+        if (axios.isCancel(err)) {
+          console.log("Fetch cancelled", err.message);
+        } else {
+          setError(err.response?.data?.message || err.message); // Provide more context for errors
+        }
+      }
+    };
+
+    fetchProductById();
+
+    return () => {
+      source.cancel("Operation cancelled by the user");
+    };
+  }, [id]);
+
+  return (
+    <Container maxW={"container.xl"} mt={10}>
+      {error && (
+        <Text textAlign={"center"} fontSize={"md"} color={"red.500"}>
+          {error}
+        </Text>
+      )}
+
+      <Link to={"/"}>
+        <Button
+          variant={"outline"}
+          colorScheme="blue"
+          leftIcon={<FaArrowLeft />}
+          mb={10}
+        >
+          Back
+        </Button>
+      </Link>
+
+      {!error && product && (
+        <Card
+          direction={{ base: "column", sm: "row" }}
+          overflow="hidden"
+          variant="outline"
+          maxW={"container.md"}
+          m={"auto"}
+        >
+          <Image
+            objectFit="cover"
+            maxW={{ base: "100%", sm: "200px" }}
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+          />
+          <Stack>
+            <CardBody>
+              <Heading size="md">{product.name}</Heading>
+              <Text py="2">{product.description}</Text>
+            </CardBody>
+          </Stack>
+        </Card>
+      )}
+    </Container>
+  );
+}
+
+export default DetailProductPage;
