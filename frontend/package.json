@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "dotenvx run -- vite",
-    "build": "dotenvx run -- vite build",
+    "dev": "dotenvx run -f ../.env -- vite",
+    "build": "dotenvx run -f ../.env -- vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

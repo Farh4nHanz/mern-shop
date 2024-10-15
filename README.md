@@ -63,17 +63,12 @@ To run the application, ensure you have a .env file with the following variables
 ```makefile
 PORT=5000
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.br1ts1h.mongodb.net/<database_name>
+VITE_API_URL=http://localhost:5000/api/v1
 ```
-
-If you don't know how to connect MongoDB, you may need to visit this link - [how-to-connect-mongodb](https://dev.to/dalalrohit/how-to-connect-to-mongodb-atlas-using-node-js-k9i)
 
 ### Note
 
-If you got some error when running the frontend, it might caused due to the .env file. You can solved it by creating another .env file in your frontend and pass this inside:
-
-```makefile
-VITE_API_URL=http://localhost:5000/api/v1
-```
+If you don't know how to connect MongoDB, you may need to visit this link - [how-to-connect-mongodb](https://dev.to/dalalrohit/how-to-connect-to-mongodb-atlas-using-node-js-k9i)
 
 ## License
 
