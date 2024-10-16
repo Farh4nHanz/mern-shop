@@ -1,35 +1,71 @@
-import { Link, useRouteError } from "react-router-dom";
+import {
+  useColorModeValue,
+  Heading,
+  Text,
+  Flex,
+  Button,
+  Box,
+} from "@chakra-ui/react";
+import { Link as RouterLink, useRouteError } from "react-router-dom";
 
 function ErrorPage() {
   const error = useRouteError();
 
   return (
-    <main className="grid min-h-screen place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-      <div className="text-center">
-        <h1 className="mt-4 text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+    <Box
+      h={"100vh"}
+      w={"full"}
+      display={"flex"}
+      justifyContent={"center"}
+      color={useColorModeValue("whiteAlpha.500", "gray.800")}
+    >
+      <Flex
+        direction={"column"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Heading
+          as={"h1"}
+          size={"xl"}
+          mt={4}
+          color={useColorModeValue("gray.900", "whiteAlpha.900")}
+        >
           Oops!
-        </h1>
-        <h3 className="mt-4 text-xl font-semibold tracking-tight text-gray-900 sm:text-xl">
+        </Heading>
+        <Heading
+          as={"h3"}
+          size={"md"}
+          mt={4}
+          color={useColorModeValue("gray.900", "whiteAlpha.900")}
+        >
           Sorry, an unexpected error has occured.
-        </h3>
-        <div className="mt-6 flex flex-nowrap justify-center items-center gap-3">
-          <p className="text-base font-semibold text-indigo-600">
+        </Heading>
+        <Flex mt={6} justify={"center"} align={"center"} gap={3}>
+          <Text fontSize={"sm"} fontWeight={"semibold"} color={"blue.600"}>
             {error.status}
-          </p>
-          <p className="text-base italic leading-7 text-gray-600">
+          </Text>
+          <Text
+            fontSize={"sm"}
+            fontStyle={"italic"}
+            color={useColorModeValue("gray.600", "gray.400")}
+          >
             {error.statusText}
-          </p>
-        </div>
-        <div className="mt-10 flex items-center justify-center gap-x-6">
-          <Link
+          </Text>
+        </Flex>
+        <Flex mt={10} justify={"center"} align={"center"} gap={6}>
+          <Button
+            as={RouterLink}
             to="/"
-            className="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+            variant={"solid"}
+            colorScheme={"blue"}
+            size={"sm"}
+            py={5}
           >
             Go back home
-          </Link>
-        </div>
-      </div>
-    </main>
+          </Button>
+        </Flex>
+      </Flex>
+    </Box>
   );
 }
 

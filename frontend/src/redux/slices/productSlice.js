@@ -3,9 +3,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
-  async () => {
-    const res = await axios.get("/api/products");
-    return res.data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.get("/api/products");
+
+      if (!res.data.success) return rejectWithValue(res.data.message);
+
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(
+        err?.response?.data?.message || "Failed to fetch all products!"
+      );
+    }
   }
 );
 
@@ -15,11 +24,13 @@ export const addProduct = createAsyncThunk(
     try {
       const res = await axios.post("/api/products", productData);
 
-      if (res.data.success) return res.data;
+      if (!res.data.success) return res.data.message;
 
-      return rejectWithValue(res.data.message);
+      return res.data;
     } catch (err) {
-      rejectWithValue(err?.response?.data?.message || "Failed to add product!");
+      return rejectWithValue(
+        err?.response?.data?.message || "Failed to add product!"
+      );
     }
   }
 );
@@ -30,11 +41,11 @@ export const deleteProductById = createAsyncThunk(
     try {
       const res = await axios.delete(`/api/products/${id}`);
 
-      if (res.data.success) return res.data;
+      if (!res.data.success) return rejectWithValue(res.data.message);
 
-      return rejectWithValue(res.data.message);
+      return res.data;
     } catch (err) {
-      rejectWithValue(
+      return rejectWithValue(
         err?.response?.data?.message || "Failed to delete product!"
       );
     }
@@ -47,11 +58,11 @@ export const deleteAllProducts = createAsyncThunk(
     try {
       const res = await axios.delete("/api/products");
 
-      if (res.data.success) return res.data;
+      if (!res.data.success) return rejectWithValue(res.data.message);
 
-      return rejectWithValue(res.data.message);
+      return res.data;
     } catch (err) {
-      rejectWithValue(
+      return rejectWithValue(
         err?.response?.data?.message || "Failed to delete all products!"
       );
     }
@@ -64,11 +75,11 @@ export const updateProductById = createAsyncThunk(
     try {
       const res = await axios.put(`/api/products/${id}`, updatedProduct);
 
-      if (res.data.success) return res.data;
+      if (!res.data.success) return rejectWithValue(res.data.message);
 
-      return rejectWithValue(res.data.message);
+      return res.data;
     } catch (err) {
-      rejectWithValue(
+      return rejectWithValue(
         err?.response?.data?.message || "Failed to update product!"
       );
     }
@@ -101,7 +112,7 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = "failed";
-        state.message = action.payload || "Failed to fetch products.";
+        state.message = action.payload;
       })
       .addCase(addProduct.fulfilled, (state, action) => {
         state.products.push(action.payload.data);

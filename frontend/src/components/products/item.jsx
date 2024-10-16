@@ -83,7 +83,7 @@ const ProductItem = React.memo(({ products }) => {
       />
       <Card.Footer>
         <ButtonGroup w={"full"}>
-          <Link to={`/products/detail/${product.id}`} className="me-auto">
+          <Link to={`/products/detail/${product.slug}`} className="me-auto">
             <Button variant={"solid"} colorScheme="cyan">
               Detail
             </Button>

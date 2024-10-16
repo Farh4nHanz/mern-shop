@@ -5,7 +5,7 @@ const router = e.Router();
 
 router
   .get("/", productController.getAllProducts)
-  .get("/:id", productController.getProductById);
+  .get("/:slug", productController.getProductBySlug);
 
 router.post("/", productController.addNewProduct);
 

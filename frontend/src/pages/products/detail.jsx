@@ -17,16 +17,16 @@ import {
 import { FaArrowLeft } from "react-icons/fa";
 
 function DetailProductPage() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [product, setProduct] = useState({});
   const [error, setError] = useState("");
 
   useEffect(() => {
     const source = axios.CancelToken.source();
 
-    const fetchProductById = async () => {
+    const fetchProductBySlug = async () => {
       try {
-        const res = await axios.get(`/api/products/${id}`, {
+        const res = await axios.get(`/api/products/${slug}`, {
           cancelToken: source.token,
         });
         setProduct(res.data.data); // Adjust based on response structure
@@ -39,21 +39,15 @@ function DetailProductPage() {
       }
     };
 
-    fetchProductById();
+    fetchProductBySlug();
 
     return () => {
       source.cancel("Operation cancelled by the user");
     };
-  }, [id]);
+  }, [slug]);
 
   return (
     <Container maxW={"container.xl"} mt={10}>
-      {error && (
-        <Text textAlign={"center"} fontSize={"md"} color={"red.500"}>
-          {error}
-        </Text>
-      )}
-
       <Link to={"/"}>
         <Button
           variant={"outline"}
@@ -64,6 +58,12 @@ function DetailProductPage() {
           Back
         </Button>
       </Link>
+
+      {error && (
+        <Text textAlign={"center"} fontSize={"md"} color={"red.500"}>
+          {error}
+        </Text>
+      )}
 
       {!error && product && (
         <Card

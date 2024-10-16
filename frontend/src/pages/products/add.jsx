@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import {
@@ -29,6 +29,8 @@ function AddProductPage() {
     image: "",
   });
 
+  const nameRef = useRef(null);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewProduct((n) => ({
@@ -48,6 +50,7 @@ function AddProductPage() {
 
     // clear form data after submit
     setNewProduct({ name: "", price: "", description: "", image: "" });
+    nameRef.current = nameRef.current.focus();
   };
 
   return (
@@ -67,6 +70,7 @@ function AddProductPage() {
           <Form onSubmit={addNewProduct}>
             <VStack spacing={4}>
               <Input
+                ref={nameRef}
                 type="text"
                 name="name"
                 placeholder="Name"
