@@ -29,7 +29,9 @@ function DetailProductPage() {
         import.meta.env.VITE_NODE_ENV === "development"
           ? import.meta.env.VITE_API_URL_DEV
           : import.meta.env.VITE_API_URL_PROD;
-          
+
+    console.log(API_URL);
+
       try {
         const res = await axios.get(`${API_URL}/products/${slug}`, {
           cancelToken: source.token,
