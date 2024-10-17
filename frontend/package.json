@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.10.2",
-    "@dotenvx/dotenvx": "^1.19.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@reduxjs/toolkit": "^2.2.8",
@@ -24,6 +23,7 @@
     "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.19.3",
     "@eslint/js": "^9.9.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
