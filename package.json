@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "build": "npm ci && npm i --prefix frontend && npm run build --prefix frontend",
+    "start": "NODE_ENV=production dotenvx run -- pm2 start server.js --name mern-shop && pm2 save",
+    "dev": "NODE_ENV=development nodemon -L --env-file=.env backend/server.js"
+  },
+  "keywords": [],
+  "author": "Hanz",
+  "license": "ISC",
+  "description": "MERN Shop backend",
+  "type": "module",
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.19.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.7.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
