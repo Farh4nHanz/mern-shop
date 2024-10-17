@@ -25,8 +25,13 @@ function DetailProductPage() {
     const source = axios.CancelToken.source();
 
     const fetchProductBySlug = async () => {
+      const API_URL =
+        import.meta.env.VITE_NODE_ENV === "development"
+          ? import.meta.env.VITE_API_URL_DEV
+          : import.meta.env.VITE_API_URL_PROD;
+          
       try {
-        const res = await axios.get(`/api/products/${slug}`, {
+        const res = await axios.get(`${API_URL}/products/${slug}`, {
           cancelToken: source.token,
         });
         setProduct(res.data.data); // Adjust based on response structure
