@@ -22,6 +22,7 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@34.229.190.140 "
+            git config --global --add safe.directory /home/ec2-user/mern-shop &&
             cd mern-shop &&
             git pull origin main &&
             npm install &&
