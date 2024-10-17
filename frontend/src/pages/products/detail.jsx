@@ -49,7 +49,7 @@ function DetailProductPage() {
     return () => {
       source.cancel("Operation cancelled by the user");
     };
-  }, [slug]);
+  }, [API_URL, slug]);
 
   return (
     <Container maxW={"container.xl"} mt={10}>
