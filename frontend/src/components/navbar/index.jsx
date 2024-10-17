@@ -17,15 +17,13 @@ function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Container maxW={"1140px"} px={4}>
+    <Container maxW={"1140px"} px={4} mb={10}>
       <Flex
         h={16}
+        minH={"fit-content"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        flexDir={{
-          base: "column",
-          sm: "row",
-        }}
+        flexDir={"row"}
       >
         <Text
           fontSize={{ base: "22", sm: "28" }}

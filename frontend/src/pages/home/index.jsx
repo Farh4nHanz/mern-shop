@@ -58,7 +58,7 @@ function HomePage() {
   };
 
   return (
-    <Container maxW={"container.xl"} mt={5}>
+    <Container maxW={"container.xl"}>
       {status === "loading" && (
         <Center>
           <Spinner color="blue.300" size={"xl"} />
