@@ -6,7 +6,11 @@ import morgan from "morgan";
 const app = e();
 const port = process.env.PORT;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://main.d1ahwsshgkhamo.amplifyapp.com",
+  })
+);
 
 app.use(e.json());
 app.use(e.urlencoded({ extended: false }));
