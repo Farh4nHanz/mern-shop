@@ -21,7 +21,7 @@ jobs:
           ssh-private-key: ${{ secrets.EC2_PRIVATE_KEY }}
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@AAAAB3NzaC1yc2EAAAADAQABAAABAQCj2eRdepz1X4QRmHlQeD8HZsXWFk0WZKVZ8a5Yv5wO4GsP+ooeEfiOgW6FhYtH+fn10G8ICfENH5vuC26iLsuI2WX80NMKLSyhKiSR9LU9oKhhgR7xStOb7jpuxt+uif3M3Cj4tcxt+5wB7PWmjgXmeki5eRLiJJKZAWUu9h5WrlW2gMhwFu5QinoBHkecHa17ED1C4QV4zdPJyTQ4YrRC+2PAUSHdw2BKu0zVpdZBTPTz8hoE066bRFOpQULRHQj/ohzQZ6yDfDYDQdGI5meZOD8CIPpcknr5q5p1Zr3G9WY6xeF5IZYIhYAOW4Ac5JIX+DM0MNeSW82mT5qnOwah "
+          ssh -o StrictHostKeyChecking=no ec2-user@ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCj2eRdepz1X4QRmHlQeD8HZsXWFk0WZKVZ8a5Yv5wO4GsP+ooeEfiOgW6FhYtH+fn10G8ICfENH5vuC26iLsuI2WX80NMKLSyhKiSR9LU9oKhhgR7xStOb7jpuxt+uif3M3Cj4tcxt+5wB7PWmjgXmeki5eRLiJJKZAWUu9h5WrlW2gMhwFu5QinoBHkecHa17ED1C4QV4zdPJyTQ4YrRC+2PAUSHdw2BKu0zVpdZBTPTz8hoE066bRFOpQULRHQj/ohzQZ6yDfDYDQdGI5meZOD8CIPpcknr5q5p1Zr3G9WY6xeF5IZYIhYAOW4Ac5JIX+DM0MNeSW82mT5qnOwah mern-shop "
             cd mern-shop &&
             git pull origin main &&
             npm install &&
