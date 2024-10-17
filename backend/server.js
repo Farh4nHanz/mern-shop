@@ -1,10 +1,12 @@
 import connectDB from "./config/db.js";
 import e from "express";
+import path from "path";
 import cors from "cors";
 import morgan from "morgan";
 
 const app = e();
 const port = process.env.PORT;
+const __dirname = path.resolve();
 
 app.use(
   cors({
@@ -31,6 +33,13 @@ process.env.NODE_ENV === "development"
 import productRoutes from "./routes/productRoutes.js";
 
 app.use("/api/v1/products", productRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(e.static(path.join(__dirname, "/frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
 
 app.listen(port, () => {
   connectDB();

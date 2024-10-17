@@ -25,7 +25,6 @@ jobs:
             git config --global --add safe.directory /home/ec2-user/mern-shop &&
             cd mern-shop &&
             git pull origin main &&
-            cd backend &&
             npm install &&
             pm2 restart all
           "
