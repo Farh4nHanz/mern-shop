@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -20,12 +20,11 @@ function DetailProductPage() {
   const { slug } = useParams();
   const [product, setProduct] = useState({});
   const [error, setError] = useState("");
-  
-  const API_URL = useMemo(() => {
+
+  const API_URL =
     import.meta.env.VITE_NODE_ENV === "development"
       ? import.meta.env.VITE_API_URL_DEV
       : import.meta.env.VITE_API_URL_PROD;
-  }, []);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
