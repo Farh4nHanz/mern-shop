@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "build": "npm ci && npm i --prefix frontend && npm run build --prefix frontend",
-    "start": "NODE_ENV=production dotenvx run -- pm2 start server.js --name mern-shop && pm2 save",
+    "start": "NODE_ENV=production dotenvx run -- pm2 start backend/server.js --name mern-shop && pm2 save",
     "dev": "NODE_ENV=development nodemon -L --env-file=.env backend/server.js"
   },
   "keywords": [],
