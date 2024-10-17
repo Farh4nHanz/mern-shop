@@ -9,7 +9,11 @@ const port = process.env.PORT;
 
 const __dirname = path.resolve();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://main.d14tynfj08syl2.amplifyapp.com/",
+  })
+);
 
 app.use(e.json());
 app.use(e.urlencoded({ extended: false }));
