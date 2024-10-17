@@ -13,13 +13,4 @@ export default defineConfig({
       "@hooks": "/src/hooks",
     },
   },
-  server: {
-    proxy: {
-      "/api": {
-        target: process.env.VITE_API_URL || import.meta.env.VITE_API_URL,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
-  },
 });

@@ -1,11 +1,18 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const API_URL =
+  import.meta.env.VITE_NODE_ENV === "development"
+    ? import.meta.env.VITE_API_URL_DEV
+    : import.meta.env.VITE_API_URL_PROD;
+
+console.log(API_URL);
+
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.get("/api/products");
+      const res = await axios.get(`${API_URL}/products`);
 
       if (!res.data.success) return rejectWithValue(res.data.message);
 
@@ -22,7 +29,7 @@ export const addProduct = createAsyncThunk(
   "product/addProduct",
   async (productData, { rejectWithValue }) => {
     try {
-      const res = await axios.post("/api/products", productData);
+      const res = await axios.post(`${API_URL}/products`, productData);
 
       if (!res.data.success) return res.data.message;
 
@@ -39,7 +46,7 @@ export const deleteProductById = createAsyncThunk(
   "product/deleteProductById",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await axios.delete(`/api/products/${id}`);
+      const res = await axios.delete(`${API_URL}/products/${id}`);
 
       if (!res.data.success) return rejectWithValue(res.data.message);
 
@@ -56,7 +63,7 @@ export const deleteAllProducts = createAsyncThunk(
   "product/deleteAllProducts",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.delete("/api/products");
+      const res = await axios.delete(`${API_URL}/products`);
 
       if (!res.data.success) return rejectWithValue(res.data.message);
 
@@ -73,7 +80,7 @@ export const updateProductById = createAsyncThunk(
   "product/updateProductById",
   async ({ id, updatedProduct }, { rejectWithValue }) => {
     try {
-      const res = await axios.put(`/api/products/${id}`, updatedProduct);
+      const res = await axios.put(`${API_URL}/products/${id}`, updatedProduct);
 
       if (!res.data.success) return rejectWithValue(res.data.message);
 

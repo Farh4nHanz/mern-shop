@@ -8,7 +8,8 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: "https://main.d1ahwsshgkhamo.amplifyapp.com",
+    origin: "*",
+    credentials: true,
   })
 );
 
