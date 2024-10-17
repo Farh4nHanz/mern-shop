@@ -29,15 +29,6 @@ process.env.NODE_ENV === "development"
 import productRoutes from "./routes/productRoutes.js";
 
 app.use("/api/v1/products", productRoutes);
-app.get("/api/v1/users", (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: {
-      name: "user",
-      age: 30,
-    }
-  })
-})
 
 if (process.env.NODE_ENV === "production") {
   app.use(e.static(path.join(__dirname, "/frontend/dist")));
