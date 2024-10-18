@@ -22,24 +22,25 @@ function DetailProductPage() {
   const [error, setError] = useState("");
 
   const API_URL =
-    import.meta.env.VITE_NODE_ENV === "development"
+    import.meta.env.VITE_NODE_ENV !== "development"
       ? import.meta.env.VITE_API_URL_DEV
-      : import.meta.env.VITE_API_URL_PROD;
+      : "http://34.229.190.140/api/v1";
 
   useEffect(() => {
     const source = axios.CancelToken.source();
 
     const fetchProductBySlug = async () => {
       try {
+        console.log("Fetch to API: ", API_URL);
         const res = await axios.get(`${API_URL}/products/${slug}`, {
           cancelToken: source.token,
         });
-        setProduct(res.data.data); // Adjust based on response structure
+        setProduct(res.data.data);
       } catch (err) {
         if (axios.isCancel(err)) {
           console.log("Fetch cancelled", err.message);
         } else {
-          setError(err.response?.data?.message || err.message); // Provide more context for errors
+          setError(err.response?.data?.message || err.message);
         }
       }
     };
