@@ -22,16 +22,15 @@ function DetailProductPage() {
   const [error, setError] = useState("");
 
   const API_URL =
-    import.meta.env.VITE_NODE_ENV !== "development"
+    import.meta.env.VITE_NODE_ENV === "development"
       ? import.meta.env.VITE_API_URL_DEV
-      : "http://34.229.190.140/api/v1";
+      : import.meta.env.VITE_API_URL_PROD;
 
   useEffect(() => {
     const source = axios.CancelToken.source();
 
     const fetchProductBySlug = async () => {
       try {
-        console.log("Fetch to API: ", API_URL);
         const res = await axios.get(`${API_URL}/products/${slug}`, {
           cancelToken: source.token,
         });
